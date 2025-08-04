@@ -3,9 +3,8 @@
   <header class="header">
     <div>
       <h1 class="main-title">MiniML - Predictive Quality Control</h1>
-      <span class="subtitle">Simplified Frontend</span>
     </div>
-    <img src="assets/abb-logo.png" class="logo" alt="ABB Logo" />
+    <img src="abb-logo.png" class="logo" alt="ABB Logo" />
   </header>
 
   <!-- STEPPER -->
@@ -74,8 +73,8 @@
       <div class="summary-card">
         <div class="icon daterange-icon"></div>
         <div class="summary-main">
-          <span class="summary-value daterange" [innerHTML]="dateRange"></span>
-          <span class="summary-sub">Date Range</span>
+          <span class="summary-value daterange" [innerHTML]="startDate"></span>
+          <span class="summary-sub">to {{ endDate }}</span>
         </div>
       </div>
     </div>
