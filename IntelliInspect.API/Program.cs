@@ -19,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //add ml service 
-//builder.Services.AddHttpClient();
+builder.Services.AddHttpClient();
 
 
 // Register your services (optional: move to DI)

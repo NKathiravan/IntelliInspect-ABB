@@ -38,11 +38,12 @@ class BoschQualityControlML:
         print(f"Loaded dataset with shape: {df.shape}")
         
         # Add synthetic timestamps with 1-second granularity
-        start_time = datetime(2024, 1, 1, 0, 0, 0)
-        df['timestamp'] = [start_time + timedelta(seconds=i) for i in range(len(df))]
+        # start_time = datetime(2024, 1, 1, 0, 0, 0)
+        # df['timestamp'] = [start_time + timedelta(seconds=i) for i in range(len(df))]
         
         # Ensure Id column exists
         if 'Id' not in df.columns:
+
             df['Id'] = [f'ID_{i}' for i in range(len(df))]
         
         # Handle missing values
@@ -97,7 +98,19 @@ class BoschQualityControlML:
     def train_model(self, train_data):
         """Train XGBoost model"""
         print("Training XGBoost model...")
-        
+        print(f"Training data shape: {train_data.shape}")
+        print(train_data.head())
+
+        if self.feature_columns is None:
+         self.feature_columns = [
+            col for col in train_data.columns
+            if col not in ['Id', 'timestamp', 'Response', 'synthetic_timestamp']
+            and pd.api.types.is_numeric_dtype(train_data[col])
+        ]
+
+         dropped = [col for col in train_data.columns if col not in self.feature_columns and col not in ['Id', 'timestamp', 'Response', 'synthetic_timestamp']]
+         print(f"Dropped non-numeric or excluded columns: {dropped}")
+
         # Prepare features and target
         X_train = self.prepare_features(train_data, fit_scaler=True)
         y_train = train_data['Response']
@@ -111,7 +124,8 @@ class BoschQualityControlML:
             'n_estimators': 100,
             'subsample': 0.8,
             'colsample_bytree': 0.8,
-            'random_state': 42
+            'random_state': 42,
+            'base_score':0.5
         }
         
         # Train model with evaluation
@@ -270,6 +284,18 @@ class BoschQualityControlML:
     def create_donut_chart(self, evaluation_results):
         """Create donut chart for prediction breakdown"""
         cm = evaluation_results['confusion_matrix']
+        if cm.shape != (2, 2):
+            new_cm = [[0, 0], [0, 0]]
+        if cm.shape == (1, 1):
+            # All predicted and actual are class 0
+            new_cm[0][0] = cm[0][0]
+        elif cm.shape == (1, 2):
+            new_cm[0][0], new_cm[0][1] = cm[0]
+        elif cm.shape == (2, 1):
+            new_cm[0][0] = cm[0][0]
+            new_cm[1][0] = cm[1][0]
+        cm = np.array(new_cm)
+
         tn, fp, fn, tp = cm.ravel()
         
         labels = ['True Negative', 'False Positive', 'False Negative', 'True Positive']

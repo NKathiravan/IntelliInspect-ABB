@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using IntelliInspect.API.Services;
 using IntelliInspect.API.Models;
+using System.IO;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -26,6 +27,19 @@ public class DatasetController : ControllerBase
         {
             return BadRequest(new { error = ex.Message });
         }
+    }
+    private readonly string datasetPath = Path.Combine(Directory.GetCurrentDirectory(), "TempFiles", "dataset.csv");
+
+    [HttpGet("download")]
+    public IActionResult DownloadDataset()
+    {
+        if (!System.IO.File.Exists(datasetPath))
+        {
+            return NotFound("Dataset file not found.");
+        }
+
+        var stream = new FileStream(datasetPath, FileMode.Open, FileAccess.Read);
+        return File(stream, "text/csv", "dataset.csv");
     }
 
 }
