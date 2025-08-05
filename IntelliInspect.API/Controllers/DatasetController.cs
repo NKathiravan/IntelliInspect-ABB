@@ -4,9 +4,10 @@ using IntelliInspect.API.Models;
 
 [ApiController]
 [Route("api/[controller]")]
+[RequestSizeLimit(10_000_000_000)]
 public class DatasetController : ControllerBase
 {
-    private readonly DatasetService _datasetService;
+    private readonly DatasetService _datasetService = new DatasetService();
 
     public DatasetController()
     {
@@ -26,5 +27,5 @@ public class DatasetController : ControllerBase
             return BadRequest(new { error = ex.Message });
         }
     }
+
 }
-    

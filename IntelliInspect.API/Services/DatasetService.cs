@@ -18,7 +18,7 @@ namespace IntelliInspect.API.Services
             if (!file.FileName.EndsWith(".csv"))
                 throw new Exception("Only CSV files are allowed.");
 
-            var filePath = Path.Combine(_storagePath, file.FileName);
+            var filePath = Path.Combine(_storagePath, "dataset.csv");
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
