@@ -1,0 +1,218 @@
+body, html {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+/* Wrapper */
+.page-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(90deg, #e61e1e 0%, #f85b5b 50%, #ffffff 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 22px 38px 12px 38px;
+  border-radius: 0 0 15px 15px;
+}
+.main-title {
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+.logo {
+  height: 50px;
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 62px;
+  padding: 18px 0 13px 48px;
+  margin-bottom: 8px;
+}
+.step {
+  text-align: center;
+  color: #6b7280;
+  font-size: 15px;
+}
+.step .circle {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: #d1d5db;
+  color: #fff;
+  border-radius: 50%;
+  line-height: 32px;
+  font-weight: bold;
+  margin: 0 auto 7px auto;
+  font-size: 15px;
+}
+.step.active .circle,
+.step.completed .circle {
+  background: #22c55e;
+}
+.step.active .step-label {
+  color: #111827;
+  font-weight: 500;
+}
+.step.completed {
+  color: #22c55e;
+}
+
+/* Main Panel */
+.main-panel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 7px rgba(0,0,0,0.07);
+  width: 93%;
+  max-width: 1180px;
+  margin: 36px auto 0 auto;
+  padding: 36px 38px 28px 38px;
+  flex: 1 0 auto;
+}
+
+/* Panel Header */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.panel-title {
+  font-size: 21px;
+  color: #111827;
+  font-weight: 500;
+}
+.step-badge {
+  background: #3b82f6;
+  color: #fff;
+  padding: 7px 18px;
+  border-radius: 19px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Period Cards Row */
+.range-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.card {
+  background: #f1f5f9;
+  border-radius: 9px;
+  min-width: 220px;
+  max-width: 320px;
+  flex: 1;
+  box-shadow: 0 1.5px 5px rgba(61,80,185,0.04);
+  padding: 26px 19px 19px 19px;
+  border-top: 5px solid #ddd;
+  display: flex; flex-direction: column; align-items: stretch;
+}
+.card.train { border-top: 5px solid #22c55e; }
+.card.test  { border-top: 5px solid #fb923c; }
+.card.sim   { border-top: 5px solid #60a5fa; }
+.card-title {
+  font-weight: 600;
+  font-size: 1.08em;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+.card label {
+  font-size: 0.97em;
+  color: #374151;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+input[type='date'] {
+  border: 1.2px solid #c9d3e5;
+  border-radius: 7px;
+  padding: 7px 11px;
+  font-size: 15px;
+  margin-bottom: 9px;
+  background: #f8fafc;
+}
+
+/* Validation Message */
+.validation-msg {
+  margin: 16px 0 20px 0;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 1.09em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #e0fce8;
+  color: #16a34a;
+  border: 1.5px solid #bbf7d0;
+  box-shadow: 0 2px 6px rgba(34,196,94,0.04);
+}
+.validation-msg.error {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1.5px solid #fca5a5;
+}
+
+/* Action Buttons */
+.panel-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 16px;
+}
+.panel-actions button {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 11px 34px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background .18s;
+}
+.panel-actions button:last-child {
+  background: #60a5fa;
+}
+.panel-actions button:disabled {
+  background: #dbeafe;
+  color: #a5b4fc;
+  cursor: not-allowed;
+}
+.panel-actions button:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  background: linear-gradient(990deg, #ffffff 0%, #f85b5b 50%, #e61e1e 100%);
+  padding: 16px 38px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: right;
+  letter-spacing: 1.2px;
+  border-radius: 0 0 15px 15px;
+}
+.engineered {
+  letter-spacing: 1.7px;
+  font-size: 1.13em;
+}

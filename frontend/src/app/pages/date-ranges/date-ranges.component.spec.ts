@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrainModel } from './train-model';
+import { DateRanges } from './date-ranges.component';
 
-describe('TrainModel', () => {
-  let component: TrainModel;
-  let fixture: ComponentFixture<TrainModel>;
+describe('DateRanges', () => {
+  let component: DateRanges;
+  let fixture: ComponentFixture<DateRanges>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrainModel]
+      imports: [DateRanges]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TrainModel);
+    fixture = TestBed.createComponent(DateRanges);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

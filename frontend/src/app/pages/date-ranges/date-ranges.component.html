@@ -1,0 +1,74 @@
+<div class="page-wrapper">
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <h1 class="main-title">MiniML - Predictive Quality Control</h1>
+    </div>
+    <img src="abb-logo.png" class="logo" alt="ABB Logo" />
+  </header>
+
+  <!-- STEPPER -->
+  <div class="stepper">
+    <div class="step completed">
+      <span class="circle">1</span>
+      <span class="step-label">Upload Dataset</span>
+    </div>
+    <div class="step active">
+      <span class="circle">2</span>
+      <span class="step-label">Date Ranges</span>
+    </div>
+    <div class="step">
+      <span class="circle">3</span>
+      <span class="step-label">Model Training</span>
+    </div>
+    <div class="step">
+      <span class="circle">4</span>
+      <span class="step-label">Simulation</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT PANEL -->
+  <main class="main-panel">
+    <div class="panel-header">
+      <span class="panel-title">Date Range Selection</span>
+      <span class="step-badge">Step 2 of 4</span>
+    </div>
+    <div class="range-cards">
+      <div class="card train">
+        <div class="card-title">Training Period</div>
+        <label>Start Date</label>
+        <input type="date" [(ngModel)]="trainingStart" [min]="minDate" [max]="maxDate" />
+        <label>End Date</label>
+        <input type="date" [(ngModel)]="trainingEnd" [min]="minDate" [max]="maxDate" />
+      </div>
+      <div class="card test">
+        <div class="card-title">Testing Period</div>
+        <label>Start Date</label>
+        <input type="date" [(ngModel)]="testingStart" [min]="minDate" [max]="maxDate" />
+        <label>End Date</label>
+        <input type="date" [(ngModel)]="testingEnd" [min]="minDate" [max]="maxDate" />
+      </div>
+      <div class="card sim">
+        <div class="card-title">Simulation Period</div>
+        <label>Start Date</label>
+        <input type="date" [(ngModel)]="simulationStart" [min]="minDate" [max]="maxDate" />
+        <label>End Date</label>
+        <input type="date" [(ngModel)]="simulationEnd" [min]="minDate" [max]="maxDate" />
+      </div>
+    </div>
+    <div class="panel-actions">
+      <button (click)="validateRanges()">Validate Ranges</button>
+      <button (click)="onNext()" [disabled]="!isValid">Next</button>
+    </div>
+    <div *ngIf="validated" class="validation-msg" [class.error]="!isValid">
+      <span *ngIf="isValid">&#10003;</span>
+      <span *ngIf="!isValid">&#10006;</span>
+      {{ validationMessage }}
+    </div>
+    <!-- (Optionally) add summary/cards or bar chart here after validation -->
+  </main>
+
+  <footer class="footer">
+    <span>ENGINEERED TO OUTRUN</span>
+  </footer>
+</div>

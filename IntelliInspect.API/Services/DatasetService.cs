@@ -88,7 +88,7 @@ namespace IntelliInspect.API.Services
             {
                 var dict = (IDictionary<string, object>)record;
 
-                if (dict["Response"].ToString() == "0")
+                if (dict["Response"].ToString() == "1")
                     passCount++;
 
                 var ts = DateTime.Parse(dict["synthetic_timestamp"].ToString());
