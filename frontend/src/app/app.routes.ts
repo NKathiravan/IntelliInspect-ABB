@@ -8,7 +8,7 @@ import { SimulationComponent } from './pages/simulation/simulation.component';
 import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'upload', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'master', component: MasterComponent },
   {path: 'login',component: LoginComponent}
   // { path: 'date-ranges', component: DateRangesComponent },
