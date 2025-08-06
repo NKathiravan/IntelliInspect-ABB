@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router'; // ✅ ADD this
 import { RouterModule } from '@angular/router';
@@ -52,7 +52,10 @@ export class UploadComponent {
     }
   }
 
+  @Output() nextStep = new EventEmitter<void>();  // Add this
+
   onNext(): void {
-    this.router.navigate(['/date-ranges']); // ✅ Navigate to Screen 2
+    // this.router.navigate(['/date-ranges']); // ✅ Navigate to Screen 2
+    this.nextStep.emit();
   }
 }

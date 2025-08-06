@@ -1,28 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChartOptions } from 'chart.js';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
-import {
-  ChartOptions,
-  ChartDataset
-} from 'chart.js';
 
 interface ValidationResponse {
   status: string;
   message: string;
-  counts: {
-    training: number;
-    testing: number;
-    simulation: number;
-  };
-  volumeBreakdown: Array<{
+  counts: { training: number; testing: number; simulation: number };
+  monthlyCounts: {
+    count: number;
     month: string;
-    value: number;
-    period: 'training' | 'testing' | 'simulation' | 'none';
-  }>;
+    rangeType: 'Training' | 'Testing' | 'Simulation' | 'none';
+  }[];
 }
 
 @Component({
@@ -33,72 +25,88 @@ interface ValidationResponse {
   styleUrls: ['./date-ranges.component.css']
 })
 export class DateRangesComponent {
-  trainingStart = '';
-  trainingEnd = '';
-  testingStart = '';
-  testingEnd = '';
-  simulationStart = '';
-  simulationEnd = '';
+  @Output() nextStep = new EventEmitter<void>();
 
-  minDate = '2021-01-01';
-  maxDate = '2021-12-31';
+  trainingStartDate = '';
+  trainingEndDate = '';
+  trainingStartTime = '00:00:00';
+  trainingEndTime = '23:59:59';
+
+  testingStartDate = '';
+  testingEndDate = '';
+  testingStartTime = '00:00:00';
+  testingEndTime = '23:59:59';
+
+  simulationStartDate = '';
+  simulationEndDate = '';
+  simulationStartTime = '00:00:00';
+  simulationEndTime = '23:59:59';
 
   isValid = false;
   validated = false;
   validationMessage = '';
-  recordCounts = { training: 0, testing: 0, simulation: 0 };
   chartVisible = false;
 
-  barChartData = {
+  trainingData = {
     labels: [] as string[],
-    datasets: [{
-      data: [] as number[],
-      label: 'Records',
-      backgroundColor: [] as string[]
-    }]
+    datasets: [{ data: [] as number[], label: 'Training', backgroundColor: '#25c18e' }]
   };
 
-  barChartOptions: ChartOptions = {
+  testingData = {
+    labels: [] as string[],
+    datasets: [{ data: [] as number[], label: 'Testing', backgroundColor: '#ffaa33' }]
+  };
+
+  simulationData = {
+    labels: [] as string[],
+    datasets: [{ data: [] as number[], label: 'Simulation', backgroundColor: '#2b7bff' }]
+  };
+
+  barChartOptions: ChartOptions<'bar'> = {
     responsive: true,
     scales: {
-      x: { title: { display: true, text: 'Month' } },
+      x: {
+        title: { display: true, text: 'Month' }
+      },
       y: {
         beginAtZero: true,
-        title: { display: true, text: 'Records' }
+        title: { display: true, text: 'Record Count' }
       }
     },
     plugins: {
-      legend: { display: false },
-      title: { display: false }
+      legend: { display: true }
     }
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   validateRanges(): void {
     this.isValid = false;
     this.validated = false;
     this.chartVisible = false;
 
-    if (!this.areDatesInOrder()) {
-      this.validationMessage = 'Date sequence is invalid or overlapping.';
-      this.validated = true;
-      return;
-    }
-
     const payload = {
-      training: { start: this.trainingStart, end: this.trainingEnd },
-      testing: { start: this.testingStart, end: this.testingEnd },
-      simulation: { start: this.simulationStart, end: this.simulationEnd }
+      training: {
+        start: `${this.trainingStartDate}T${this.trainingStartTime}Z`,
+        end: `${this.trainingEndDate}T${this.trainingEndTime}Z`
+      },
+      testing: {
+        start: `${this.testingStartDate}T${this.testingStartTime}Z`,
+        end: `${this.testingEndDate}T${this.testingEndTime}Z`
+      },
+      simulation: {
+        start: `${this.simulationStartDate}T${this.simulationStartTime}Z`,
+        end: `${this.simulationEndDate}T${this.simulationEndTime}Z`
+      }
     };
 
-    this.http.post<ValidationResponse>('/api/DateRange/validate', payload).subscribe({
+    this.http.post<ValidationResponse>('http://localhost:5144/api/DateRange/validate', payload).subscribe({
       next: (res) => {
         this.isValid = res.status === 'Valid';
         this.validated = true;
         this.validationMessage = res.message;
-        this.recordCounts = res.counts;
-        this.buildChart(res.volumeBreakdown);
+        this.chartVisible = true;
+        this.buildCharts(res.monthlyCounts);
       },
       error: () => {
         this.isValid = false;
@@ -108,70 +116,99 @@ export class DateRangesComponent {
     });
   }
 
-  areDatesInOrder(): boolean {
-    if (
-      !this.trainingStart || !this.trainingEnd ||
-      !this.testingStart || !this.testingEnd ||
-      !this.simulationStart || !this.simulationEnd
-    ) return false;
+  // buildCharts(data: ValidationResponse['monthlyCounts']) {
+  //   const trainingLabels: string[] = [];
+  //   const trainingValues: number[] = [];
 
-    const t1 = new Date(this.trainingStart).getTime();
-    const t2 = new Date(this.trainingEnd).getTime();
-    const t3 = new Date(this.testingStart).getTime();
-    const t4 = new Date(this.testingEnd).getTime();
-    const t5 = new Date(this.simulationStart).getTime();
-    const t6 = new Date(this.simulationEnd).getTime();
-    const min = new Date(this.minDate).getTime();
-    const max = new Date(this.maxDate).getTime();
+  //   const testingLabels: string[] = [];
+  //   const testingValues: number[] = [];
 
-    return (
-      t1 <= t2 &&
-      t2 < t3 &&
-      t3 <= t4 &&
-      t4 < t5 &&
-      t5 <= t6 &&
-      t1 >= min &&
-      t6 <= max
-    );
-  }
+  //   const simulationLabels: string[] = [];
+  //   const simulationValues: number[] = [];
 
-  buildChart(data: ValidationResponse['volumeBreakdown']) {
-    const labels: string[] = [];
-    const values: number[] = [];
-    const colors: string[] = [];
+  //   data.forEach(entry => {
+  //     if (entry.rangeType === 'training') {
+  //       trainingLabels.push(entry.month);
+  //       trainingValues.push(entry.count);
+  //     } else if (entry.rangeType === 'testing') {
+  //       testingLabels.push(entry.month);
+  //       testingValues.push(entry.count);
+  //     } else if (entry.rangeType === 'simulation') {
+  //       simulationLabels.push(entry.month);
+  //       simulationValues.push(entry.count);
+  //     }
+  //   });
 
-    data.forEach(entry => {
-      labels.push(entry.month);
-      values.push(entry.value);
-      colors.push(
-        entry.period === 'training' ? '#25c18e' :
-        entry.period === 'testing' ? '#ffaa33' :
-        entry.period === 'simulation' ? '#2b7bff' : '#ccc'
-      );
-    });
+  //   this.trainingData = {
+  //     labels: trainingLabels,
+  //     datasets: [{ data: trainingValues, label: 'Training', backgroundColor: '#25c18e' }]
+  //   };
 
-    this.barChartData = {
-      labels,
-      datasets: [{
-        data: values,
-        label: 'Records',
-        backgroundColor: colors
-      }]
-    };
+  //   this.testingData = {
+  //     labels: testingLabels,
+  //     datasets: [{ data: testingValues, label: 'Testing', backgroundColor: '#ffaa33' }]
+  //   };
 
-    this.chartVisible = true;
-  }
+  //   this.simulationData = {
+  //     labels: simulationLabels,
+  //     datasets: [{ data: simulationValues, label: 'Simulation', backgroundColor: '#2b7bff' }]
+  //   };
+  // }
+  buildCharts(data: ValidationResponse['monthlyCounts']) {
+  const trainingLabels: string[] = [];
+  const trainingValues: number[] = [];
 
-  periodDuration(start: string, end: string): number {
-    if (!start || !end) return 0;
-    return Math.floor(
-      (new Date(end).getTime() - new Date(start).getTime()) / (1000 * 3600 * 24)
-    ) + 1;
-  }
+  const testingLabels: string[] = [];
+  const testingValues: number[] = [];
 
-  onNext() {
+  const simulationLabels: string[] = [];
+  const simulationValues: number[] = [];
+
+  data.forEach(entry => {
+    if (entry.rangeType === 'Training') {
+      trainingLabels.push(entry.month);
+      trainingValues.push(+entry.count); // convert to number
+    } else if (entry.rangeType === 'Testing') {
+      testingLabels.push(entry.month);
+      testingValues.push(+entry.count);
+    } else if (entry.rangeType === 'Simulation') {
+      simulationLabels.push(entry.month);
+      simulationValues.push(+entry.count);
+    }
+  });
+
+  this.trainingData = {
+    labels: trainingLabels,
+    datasets: [{
+      data: trainingValues,
+      label: 'Training',
+      backgroundColor: '#25c18e'
+    }]
+  };
+
+  this.testingData = {
+    labels: testingLabels,
+    datasets: [{
+      data: testingValues,
+      label: 'Testing',
+      backgroundColor: '#ffaa33'
+    }]
+  };
+
+  this.simulationData = {
+    labels: simulationLabels,
+    datasets: [{
+      data: simulationValues,
+      label: 'Simulation',
+      backgroundColor: '#2b7bff'
+    }]
+  };
+}
+
+
+  onNext(): void {
     if (this.isValid) {
-      this.router.navigate(['/train-model']);
+      this.nextStep.emit();
     }
   }
 }

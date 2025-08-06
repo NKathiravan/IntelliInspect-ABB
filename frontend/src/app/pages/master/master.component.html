@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="currentStep">
+    <app-upload *ngSwitchCase="0" (nextStep)="goToNextStep()"></app-upload>
+    <app-date-ranges *ngSwitchCase="1" (nextStep)="goToNextStep()"></app-date-ranges>
+    <app-model-training *ngSwitchCase="2" (nextStep)="goToNextStep()"></app-model-training>
+    <app-simulation *ngSwitchCase="3" (nextStep)="goToNextStep()"></app-simulation>
+</ng-container>
