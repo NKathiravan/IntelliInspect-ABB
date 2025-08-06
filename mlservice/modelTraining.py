@@ -284,6 +284,8 @@ class BoschQualityControlML:
     def create_donut_chart(self, evaluation_results):
         """Create donut chart for prediction breakdown"""
         cm = evaluation_results['confusion_matrix']
+        if cm.shape== (2, 2):
+            new_cm=cm
         if cm.shape != (2, 2):
             new_cm = [[0, 0], [0, 0]]
         if cm.shape == (1, 1):
