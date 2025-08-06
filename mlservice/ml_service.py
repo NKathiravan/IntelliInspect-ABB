@@ -109,6 +109,9 @@ from io import BytesIO
 from modelTraining import BoschQualityControlML
 from fastapi.middleware.cors import CORSMiddleware
 import traceback
+from simulation import SimulationRequest, simulate_predictions
+from fastapi.responses import StreamingResponse
+import os
 
 # Initialize FastAPI app
 app = FastAPI(title="Bosch ML Training API")
@@ -149,6 +152,11 @@ def fetch_dataset_from_dotnet():
         response = requests.get(url)
         response.raise_for_status()
         df = pd.read_csv(BytesIO(response.content))
+        os.makedirs("data", exist_ok=True)
+
+        # Save the CSV to data/dataset.csv
+        dataset_path = os.path.join("data", "dataset.csv")
+        df.to_csv(dataset_path, index=False)
         return df
     except Exception as e:
         raise RuntimeError(f"Failed to fetch dataset: {e}")
@@ -185,6 +193,8 @@ def train_model(request: TrainRequest):
 
         # Step 5: Train and evaluate model
         ml_system.train_model(train_data)
+        ml_system.save_model()  # Save the trained model
+
         evaluation = ml_system.evaluate_model(test_data)
 
         # Step 6: Create visuals
@@ -207,3 +217,8 @@ def train_model(request: TrainRequest):
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+@app.post("/simulate")
+async def simulate(request: SimulationRequest):
+    
+    return StreamingResponse(simulate_predictions(request.StartDate, request.EndDate),
+                              media_type="text/event-stream")

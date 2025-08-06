@@ -26,6 +26,9 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<DatasetService>();
 //builder.Services.AddScoped<IDatasetService, DatasetService>();
 
+//regiter simulation service 
+builder.Services.AddScoped<SimulationService>();
+
 
 var app = builder.Build();
 
