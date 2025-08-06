@@ -1,4 +1,44 @@
-<div class="simulation">
-  <h2>Simulation</h2>
-  <p>This is the Simulation step (Step 4).</p>
+<div class="simulation-container">
+  <h2>Step 4: Real-Time Prediction Simulation</h2>
+
+  <button class="start-btn" (click)="startSimulation()" [disabled]="simulationStarted">
+    {{ simulationStarted ? 'Simulation Running...' : 'Start Simulation' }}
+  </button>
+
+  <div class="chart-row">
+    <div class="chart-box">
+      <h3>Real-Time Quality Predictions</h3>
+      <canvas baseChart [data]="lineChartData" [type]="'line'"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Prediction Confidence</h3>
+      <canvas baseChart [data]="donutChartData" [type]="'doughnut'"></canvas>
+    </div>
+  </div>
+
+  <div class="stats-panel">
+    <div>Total: {{ total }}</div>
+    <div>Pass: {{ pass }}</div>
+    <div>Fail: {{ fail }}</div>
+    <div>Avg Confidence: {{ avgConfidence | number : '1.0-2' }}%</div>
+  </div>
+
+  <table class="prediction-table" *ngIf="tableRows.length > 0">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Sample ID</th>
+        <th>Prediction</th>
+        <th>Confidence (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableRows">
+        <td>{{ row.time }}</td>
+        <td>{{ row.sample_id }}</td>
+        <td>{{ row.prediction }}</td>
+        <td>{{ row.confidence }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

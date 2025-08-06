@@ -1,3 +1,50 @@
-.simulation {
-  padding: 2rem;
+.simulation-container {
+  padding: 20px;
+}
+
+.start-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.chart-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.chart-box {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+.stats-panel {
+  display: flex;
+  justify-content: space-around;
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.prediction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.prediction-table th,
+.prediction-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
 }
