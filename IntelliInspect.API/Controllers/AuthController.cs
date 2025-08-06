@@ -86,30 +86,13 @@ public class AuthController : ControllerBase
 
         return Ok(new { message = "Login successful" });
     }
-
+    [Authorize(Roles ="User,Admin")]
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return Ok(new { message = "Logged out successfully" });
     }
-
-    //[Authorize]
-    //[HttpPost("logout")]
-    //public IActionResult Logout()
-    //{
-    //    var token = Request.Cookies["jwt"];
-    //    if (!string.IsNullOrEmpty(token))
-    //    {
-    //        _blacklistService.Blacklist(token);
-
-    //        // Clear cookie
-    //        Response.Cookies.Delete("jwt");
-    //        return Ok("Logged out successfully");
-    //    }
-
-    //    return BadRequest("No token found in cookies");
-    //}
 
     [Authorize(Roles = "Admin")]
     [HttpGet("admin")]

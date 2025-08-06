@@ -164,11 +164,11 @@
     border-radius: 7px;
     margin-bottom: 8px;
   }
-  .csv-icon { background: #f1f5f9 url('C:/Users/Lenovo/intelliinspect-hackathon/frontend/src/assets/icons/columns.svg') center/17px no-repeat; }
-  .records-icon { background: #f1f5f9 url('C:/Users/Lenovo/intelliinspect-hackathon/frontend/src/assets/icons/records.svg') center/17px no-repeat; }
-  .columns-icon { background: #f1f5f9 url('C:/Users/Lenovo/intelliinspect-hackathon/frontend/src/assets/icons/columns.svg') center/17px no-repeat; }
-  .passrate-icon { background: #f1f5f9 url('C:/Users/Lenovo/intelliinspect-hackathon/frontend/src/assets/icons/pass.svg') center/17px no-repeat; }
-  .daterange-icon { background: #f1f5f9 url('C:/Users/Lenovo/intelliinspect-hackathon/frontend/src/assets/icons/date.svg') center/17px no-repeat; }
+  .csv-icon { background: #f1f5f9 url('../../../assets/icons/csv.svg') center/17px no-repeat; }
+  .records-icon { background: #f1f5f9 url('../../../assets/icons/records.svg') center/17px no-repeat; }
+  .columns-icon { background: #f1f5f9 url('../../../assets/icons/columns.svg') center/17px no-repeat; }
+  .passrate-icon { background: #f1f5f9 url('../../../assets/icons/pass.svg') center/17px no-repeat; }
+  .daterange-icon { background: #f1f5f9 url('../../../assets/icons/date.svg') center/17px no-repeat; }
 
   /* Summary Card Content */
   .summary-main {
