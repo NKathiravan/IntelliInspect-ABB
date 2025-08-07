@@ -41,6 +41,8 @@ class ModelPredictor:
 
 
 predictor = ModelPredictor()
+if not predictor.load_model():
+    raise RuntimeError("Failed to load model or scaler. Please check the paths.")
 predictor.load_model()
 
 

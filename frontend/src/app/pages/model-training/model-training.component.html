@@ -1,27 +1,39 @@
+<!-- Only model training step content, no header/footer/stepper here -->
 <div class="model-training-container">
-  <h2>Model Training & Evaluation</h2>
-
-  <button (click)="onTrainModel()" [disabled]="loading || isTrained">Train Model</button>
-  <p class="status">{{ statusMessage }}</p>
-
-  <div *ngIf="isTrained" class="metrics-section">
-    <div class="metric-card">Accuracy: {{ metrics.accuracy }}%</div>
-    <div class="metric-card">Precision: {{ metrics.precision }}%</div>
-    <div class="metric-card">Recall: {{ metrics.recall }}%</div>
-    <div class="metric-card">F1 Score: {{ metrics.f1_Score }}%</div>
-  </div>
-
-  <div *ngIf="isTrained" class="charts-section">
-    <div class="chart-box">
-      <h3>Training Metrics</h3>
-      <img [src]="trainingChartImage" alt="Training Line Chart">
+  <div>
+    <div class="panel-header">
+      <span class="panel-title">Model Training</span>
+      <span class="step-badge">Step 3 of 4</span>
     </div>
 
-    <div class="chart-box">
-      <h3>Model Performance</h3>
-      <img [src]="donutChartImage" alt="Donut Chart">
+    <!-- Train Model + Status Message Row -->
+    <div class="train-status-row">
+      <button (click)="onTrainModel()" [disabled]="loading || isTrained">Train Model</button>
+      <p class="status">{{ statusMessage }}</p>
     </div>
-  </div>
 
-  <button (click)="onNext()" [disabled]="!isTrained" class="next-button">Next</button>
+    <!-- Metrics -->
+    <div *ngIf="isTrained" class="metrics-section">
+      <div class="metric-card">Accuracy: {{ metrics.accuracy }}%</div>
+      <div class="metric-card">Precision: {{ metrics.precision }}%</div>
+      <div class="metric-card">Recall: {{ metrics.recall }}%</div>
+      <div class="metric-card">F1 Score: {{ metrics.f1_Score }}%</div>
+    </div>
+
+    <!-- Charts -->
+    <div *ngIf="isTrained" class="charts-section">
+      <div class="chart-box">
+        <h3>Training Metrics</h3>
+        <img [src]="trainingChartImage" alt="Training Line Chart">
+      </div>
+
+      <div class="chart-box">
+        <h3>Model Performance</h3>
+        <img [src]="donutChartImage" alt="Donut Chart">
+      </div>
+    </div>
+
+    <!-- Next Button -->
+    <button (click)="onNext()" [disabled]="!isTrained" class="next-button">Next</button>
+  </div>
 </div>

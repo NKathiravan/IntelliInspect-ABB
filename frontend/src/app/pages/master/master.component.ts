@@ -1,20 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { UploadComponent } from "../upload/upload.component";
-import { DateRangesComponent } from "../date-ranges/date-ranges.component";
-import { ModelTrainingComponent } from "../model-training/model-training.component";
-import { SimulationComponent } from "../simulation/simulation.component";
+
+// Import standalone components
+import { UploadComponent } from '../upload/upload.component';
+import { DateRangesComponent } from '../date-ranges/date-ranges.component';
+import { ModelTrainingComponent } from '../model-training/model-training.component';
+import { SimulationComponent } from '../simulation/simulation.component';
 
 @Component({
   selector: 'app-master',
-  imports: [CommonModule, UploadComponent, DateRangesComponent, ModelTrainingComponent, SimulationComponent],
+  standalone: true, // ✅ Required for using standalone components
+  imports: [
+    CommonModule,
+    UploadComponent,
+    DateRangesComponent,
+    ModelTrainingComponent,
+    SimulationComponent
+  ],
   templateUrl: './master.component.html',
-  styleUrl: './master.component.css'
+  styleUrls: ['./master.component.css']
 })
 export class MasterComponent {
-  currentStep: number = 0;
+  currentStep = 0;
 
   goToNextStep(): void {
-    this.currentStep++;
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    }
+  }
+
+  goToPreviousStep(): void {
+    if (this.currentStep > 0) {
+      this.currentStep--;
+    }
   }
 }

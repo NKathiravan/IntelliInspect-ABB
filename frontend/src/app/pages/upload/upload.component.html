@@ -1,88 +1,73 @@
-<div class="page-wrapper">
-  <!-- HEADER -->
-  <header class="header">
-    <div>
-      <h1 class="main-title">MiniML - Predictive Quality Control</h1>
-    </div>
-    <img src="abb-logo.svg" class="logo" alt="ABB Logo" />
-  </header>
+<!-- Only upload content, no header/footer/stepper here -->
+<div>
+  <div>
+  <div class="panel-header">
+    <span class="panel-title">Date Range Selection</span>
+    <span class="step-badge">Step 1 of 4</span>
+  </div>
+  <!-- Upload Box -->
+  <div class="upload-box" *ngIf="!fileUploaded">
+    <label for="fileInput" class="file-label">Choose CSV File</label>
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".csv" />
+  </div>
 
-  <!-- STEPPER -->
-  <div class="stepper">
-    <div class="step active">
-      <span class="circle">1</span>
-      <span class="step-label">Upload Dataset</span>
+  <!-- Summary Cards -->
+  <div class="summary-box" *ngIf="fileUploaded">
+    <!-- File Info Card -->
+    <div class="summary-card">
+      <div class="icon csv-icon">
+        <img src="../../assets/icons/csv.svg" alt="CSV Icon" />
+      </div>
+      <div class="summary-main">
+        <a class="summary-link" [href]="fileURL" target="_blank">{{ fileName }}</a>
+        <span class="summary-sub">{{ fileSize }}</span>
+      </div>
     </div>
-    <div class="step">
-      <span class="circle">2</span>
-      <span class="step-label">Date Ranges</span>
+
+    <!-- Records Card -->
+    <div class="summary-card">
+      <div class="icon records-icon">
+        <img src="../../assets/icons/records.svg" alt="Records Icon" />
+      </div>
+      <div class="summary-main">
+        <span class="summary-value records">{{ recordCount }}</span>
+        <span class="summary-sub">Records</span>
+      </div>
     </div>
-    <div class="step">
-      <span class="circle">3</span>
-      <span class="step-label">Model Training</span>
+
+    <!-- Columns Card (Fixed) -->
+    <div class="summary-card">
+      <div class="icon columns-icon">
+        <img src="../../assets/icons/columns.svg" alt="Columns Icon" />
+      </div>
+      <div class="summary-main">
+        <span class="summary-value columns">{{ columnCount }}</span>
+        <span class="summary-sub">Columns</span>
+      </div>
     </div>
-    <div class="step">
-      <span class="circle">4</span>
-      <span class="step-label">Simulation</span>
+
+    <!-- Pass Rate Card -->
+    <div class="summary-card">
+      <div class="icon passrate-icon">
+        <img src="../../assets/icons/pass.svg" alt="Pass Rate Icon" />
+      </div>
+      <div class="summary-main">
+        <span class="summary-value passrate">{{ passRate }}%</span>
+        <span class="summary-sub">Pass Rate</span>
+      </div>
+    </div>
+
+    <!-- Date Range Card -->
+    <div class="summary-card">
+      <div class="icon daterange-icon">
+        <img src="../../assets/icons/date.svg" alt="Date Range Icon" />
+      </div>
+      <div class="summary-main">
+        <span class="summary-value daterange" [innerHTML]="startDate"></span>
+        <span class="summary-sub">to {{ endDate }}</span>
+      </div>
     </div>
   </div>
 
-  <!-- MAIN PANEL -->
-  <main class="main-panel">
-    <div class="panel-header">
-      <span class="panel-title">Upload Dataset</span>
-      <span class="step-badge">Step 1 of 4</span>
-    </div>
-
-    <!-- Upload Box -->
-    <div class="upload-box" *ngIf="!fileUploaded">
-      <label for="fileInput" class="file-label">Choose CSV File</label>
-      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".csv" />
-    </div>
-
-    <!-- Summary Card -->
-    <div class="summary-box" *ngIf="fileUploaded">
-      <div class="summary-card">
-        <div class="icon csv-icon"></div>
-        <div class="summary-main">
-          <a class="summary-link" [href]="fileURL" target="_blank">{{ fileName }}</a>
-          <span class="summary-sub">{{ fileSize }}</span>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="icon records-icon"></div>
-        <div class="summary-main">
-          <span class="summary-value records">{{ recordCount }}</span>
-          <span class="summary-sub">Records</span>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="icon columns-icon"></div>
-        <div class="summary-main">
-          <span class="summary-value columns">{{ columnCount }}</span>
-          <span class="summary-sub">Columns</span>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="icon passrate-icon"></div>
-        <div class="summary-main">
-          <span class="summary-value passrate">{{ passRate }}%</span>
-          <span class="summary-sub">Pass Rate</span>
-        </div>
-      </div>
-      <div class="summary-card">
-        <div class="icon daterange-icon"></div>
-        <div class="summary-main">
-          <span class="summary-value daterange" [innerHTML]="startDate"></span>
-          <span class="summary-sub">to {{ endDate }}</span>
-        </div>
-      </div>
-    </div>
-
-    <button class="next-btn" [disabled]="!fileUploaded" (click)="onNext()">Next</button>
-  </main>
-
-  <footer class="footer">
-    <span>ENGINEERED TO OUTRUN</span>
-  </footer>
+  <button class="next-btn" [disabled]="!fileUploaded" (click)="onNext()">Next</button>
 </div>

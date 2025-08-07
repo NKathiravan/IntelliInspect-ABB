@@ -1,102 +1,29 @@
-/* .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #f3f3f3;
-}
-
-.card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  width: 300px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-form div {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #3f51b5;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button:hover {
-  background-color: #303f9f;
-}
-
-.toggle {
-  text-align: center;
-  color: #3f51b5;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.message {
-  margin-top: 15px;
-  text-align: center;
-  color: green;
-} */
-
-
-/* Background */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--color-header-gradient-1), var(--color-header-gradient-2));
 }
 
-/* Card with glass effect */
 .card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
+  background: var(--color-glass);
+  backdrop-filter: var(--color-glass-backdrop);
   padding: 40px 30px;
-  border-radius: 15px;
+  border-radius: var(--radius-main);
   width: 320px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--color-shadow);
+  border: 1px solid var(--color-card-border);
+  color: var(--color-text-light);
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Heading */
 h2 {
   text-align: center;
-  color: #ffffff;
+  color: var(--color-text-light);
   margin-bottom: 25px;
 }
 
-/* Form fields */
 form div {
   margin-bottom: 20px;
 }
@@ -104,7 +31,7 @@ form div {
 label {
   display: block;
   margin-bottom: 5px;
-  color: #ffffff;
+  color: var(--color-text-light);
   font-size: 14px;
 }
 
@@ -120,10 +47,9 @@ input {
 }
 
 input:focus {
-  box-shadow: 0 0 5px #ffffff;
+  box-shadow: 0 0 5px var(--color-text-light);
 }
 
-/* Button */
 .action-btn {
   width: 100%;
   padding: 12px;
@@ -141,10 +67,9 @@ input:focus {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Toggle */
 .toggle {
   text-align: center;
-  color: #ffffff;
+  color: var(--color-text-light);
   cursor: pointer;
   margin-top: 20px;
   transition: color 0.3s;
@@ -155,22 +80,9 @@ input:focus {
   text-decoration: underline;
 }
 
-/* Message */
 .message {
   margin-top: 20px;
   text-align: center;
-  color: #fff;
+  color: var(--color-text-light);
   font-weight: bold;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

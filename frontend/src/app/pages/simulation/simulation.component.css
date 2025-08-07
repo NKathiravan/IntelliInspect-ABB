@@ -1,3 +1,78 @@
+/* .simulation-container {
+  padding: 20px;
+  color: var(--color-text-main);
+}
+
+.start-btn {
+  background-color: var(--color-btn-primary);
+  color: var(--color-text-light);
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--radius-btn);
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.25s ease;
+}
+
+.start-btn:disabled {
+  background-color: var(--color-btn-disabled);
+  cursor: not-allowed;
+  color: #b4b4b4;
+}
+
+.chart-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.chart-box {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-main);
+  background-color: var(--color-card);
+  color: var(--color-text-main);
+}
+
+.stats-panel {
+  display: flex;
+  justify-content: space-around;
+  background: var(--color-metric-card);
+  padding: 15px;
+  border-radius: var(--radius-main);
+  margin-bottom: 20px;
+  font-weight: bold;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--color-text-main);
+}
+
+.prediction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  color: var(--color-text-main);
+}
+
+.prediction-table th,
+.prediction-table td {
+  padding: 10px;
+  border: 1px solid var(--color-card-border);
+  text-align: left;
+}
+
+.prediction-table tr:nth-child(even) {
+  background: var(--color-table-bg-even);
+}
+
+.prediction-table tr:nth-child(odd) {
+  background: var(--color-table-bg-odd);
+} */
+
 .simulation-container {
   padding: 20px;
 }

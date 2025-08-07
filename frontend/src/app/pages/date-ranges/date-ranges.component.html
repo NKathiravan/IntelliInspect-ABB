@@ -1,116 +1,86 @@
-<div class="page-wrapper">
-  <!-- HEADER -->
-  <header class="header">
-    <div>
-      <h1 class="main-title">MiniML - Predictive Quality Control</h1>
+<div class="range-cards">
+  <div class="card train">
+    <div class="card-title">Training Period</div>
+    <div class="datetime-row">
+      <label>Start Date & Time</label>
+      <div class="datetime-inputs">
+        <input type="date" [(ngModel)]="trainingStartDate" />
+        <input type="time" [(ngModel)]="trainingStartTime" step="1" />
+      </div>
     </div>
-    <img src="assets/abb-logo.png" class="logo" alt="ABB Logo" />
-  </header>
-
-  <!-- STEPPER -->
-  <div class="stepper">
-    <div class="step completed">
-      <span class="circle">1</span>
-      <span class="step-label">Upload Dataset</span>
-    </div>
-    <div class="step active">
-      <span class="circle">2</span>
-      <span class="step-label">Date Ranges</span>
-    </div>
-    <div class="step">
-      <span class="circle">3</span>
-      <span class="step-label">Model Training</span>
-    </div>
-    <div class="step">
-      <span class="circle">4</span>
-      <span class="step-label">Simulation</span>
+    <div class="datetime-row">
+      <label>End Date & Time</label>
+      <div class="datetime-inputs">
+        <input type="date" [(ngModel)]="trainingEndDate" />
+        <input type="time" [(ngModel)]="trainingEndTime" step="1" />
+      </div>
     </div>
   </div>
 
-  <!-- MAIN PANEL -->
-  <main class="main-panel">
-    <div class="panel-header">
-      <span class="panel-title">Date Range Selection</span>
-      <span class="step-badge">Step 2 of 4</span>
-    </div>
-
-    <!-- Range Cards -->
-    <div class="range-cards">
-      <div class="card train">
-        <div class="card-title">Training Period</div>
-        <label>Start Date & Time</label>
-        <div class="datetime-inputs">
-          <input type="date" [(ngModel)]="trainingStartDate" />
-          <input type="time" [(ngModel)]="trainingStartTime" step="1" />
-        </div>
-        <label>End Date & Time</label>
-        <div class="datetime-inputs">
-          <input type="date" [(ngModel)]="trainingEndDate" />
-          <input type="time" [(ngModel)]="trainingEndTime" step="1" />
-        </div>
-      </div>
-
-      <div class="card test">
-        <div class="card-title">Testing Period</div>
-        <label>Start Date & Time</label>
-        <div class="datetime-inputs">
-          <input type="date" [(ngModel)]="testingStartDate" />
-          <input type="time" [(ngModel)]="testingStartTime" step="1" />
-        </div>
-        <label>End Date & Time</label>
-        <div class="datetime-inputs">
-          <input type="date" [(ngModel)]="testingEndDate" />
-          <input type="time" [(ngModel)]="testingEndTime" step="1" />
-        </div>
-      </div>
-
-      <div class="card sim">
-        <div class="card-title">Simulation Period</div>
-        <label>Start Date & Time</label>
-        <div class="datetime-inputs">
-          <input type="date" [(ngModel)]="simulationStartDate" />
-          <input type="time" [(ngModel)]="simulationStartTime" step="1" />
-        </div>
-        <label>End Date & Time</label>
-        <div class="datetime-inputs">
-          <input type="date" [(ngModel)]="simulationEndDate" />
-          <input type="time" [(ngModel)]="simulationEndTime" step="1" />
-        </div>
+  <div class="card test">
+    <div class="card-title">Testing Period</div>
+    <div class="datetime-row">
+      <label>Start Date & Time</label>
+      <div class="datetime-inputs">
+        <input type="date" [(ngModel)]="testingStartDate" />
+        <input type="time" [(ngModel)]="testingStartTime" step="1" />
       </div>
     </div>
-
-    <!-- Action Buttons -->
-    <div class="panel-actions">
-      <button (click)="validateRanges()">Validate Ranges</button>
-      <button (click)="onNext()" [disabled]="!isValid">Next</button>
-    </div>
-
-    <!-- Validation Message -->
-    <div *ngIf="validated" class="validation-msg" [class.error]="!isValid">
-      <span *ngIf="isValid">&#10003;</span>
-      <span *ngIf="!isValid">&#10006;</span>
-      {{ validationMessage }}
-    </div>
-
-    <!-- Bar Charts -->
-    <div class="chart-grid" *ngIf="chartVisible">
-      <div class="chart-card">
-        <h3>Training Data</h3>
-        <canvas baseChart [data]="trainingData" [options]="barChartOptions" chartType="bar"></canvas>
-      </div>
-      <div class="chart-card">
-        <h3>Testing Data</h3>
-        <canvas baseChart [data]="testingData" [options]="barChartOptions" chartType="bar"></canvas>
-      </div>
-      <div class="chart-card">
-        <h3>Simulation Data</h3>
-        <canvas baseChart [data]="simulationData" [options]="barChartOptions" chartType="bar"></canvas>
+    <div class="datetime-row">
+      <label>End Date & Time</label>
+      <div class="datetime-inputs">
+        <input type="date" [(ngModel)]="testingEndDate" />
+        <input type="time" [(ngModel)]="testingEndTime" step="1" />
       </div>
     </div>
-  </main>
+  </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <span>ENGINEERED TO OUTRUN</span>
-  </footer>
+  <div class="card sim">
+    <div class="card-title">Simulation Period</div>
+    <div class="datetime-row">
+      <label>Start Date & Time</label>
+      <div class="datetime-inputs">
+        <input type="date" [(ngModel)]="simulationStartDate" />
+        <input type="time" [(ngModel)]="simulationStartTime" step="1" />
+      </div>
+    </div>
+    <div class="datetime-row">
+      <label>End Date & Time</label>
+      <div class="datetime-inputs">
+        <input type="date" [(ngModel)]="simulationEndDate" />
+        <input type="time" [(ngModel)]="simulationEndTime" step="1" />
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Action Buttons -->
+  <div class="panel-actions">
+    <button (click)="validateRanges()">Validate Ranges</button>
+    <button (click)="onNext()" [disabled]="!isValid">Next</button>
+  </div>
+
+  <!-- Validation Message -->
+  <div *ngIf="validated" class="validation-msg" [class.error]="!isValid">
+    <span *ngIf="isValid">&#10003;</span>
+    <span *ngIf="!isValid">&#10006;</span>
+    {{ validationMessage }}
+  </div>
+
+  <!-- Bar Charts -->
+  <div class="chart-grid" *ngIf="chartVisible">
+    <div class="chart-card">
+      <h3>Training Data</h3>
+      <canvas baseChart [data]="trainingData" [options]="barChartOptions" chartType="bar"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Testing Data</h3>
+      <canvas baseChart [data]="testingData" [options]="barChartOptions" chartType="bar"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Simulation Data</h3>
+      <canvas baseChart [data]="simulationData" [options]="barChartOptions" chartType="bar"></canvas>
+    </div>
+  </div>
 </div>

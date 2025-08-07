@@ -1,13 +1,14 @@
 .model-training-container {
   padding: 24px;
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
+  color: var(--color-text-main);
 }
 
 .status {
   margin: 10px 0;
   font-weight: bold;
-  color: #3b82f6;
+  color: var(--color-status-text);
 }
 
 .metrics-section {
@@ -19,32 +20,38 @@
 }
 
 .metric-card {
-  background-color: #e0f7fa;
+  background-color: var(--color-metric-card);
   padding: 16px 24px;
-  border-radius: 8px;
+  border-radius: var(--radius-main);
   font-size: 18px;
   font-weight: bold;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--color-shadow);
+  color: var(--color-text-main);
 }
 
 .charts-section {
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* stack children vertically */
+  align-items: center;    /* center each chart-box horizontally */
   gap: 32px;
   margin-top: 30px;
-  flex-wrap: wrap;
 }
 
 .chart-box {
-  width: 400px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  width: 100%; /* Full width of the parent */
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-main);
   padding: 16px;
-  background: #fff;
+  background: var(--color-card);
+  color: var(--color-text-main);
+
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+  gap: 16px; /* Optional: adds space between images */
 }
 
 .chart-box img {
-  max-width: 100%;
+  width: 100%; /* Take full width of chart-box */
   height: auto;
   border-radius: 4px;
 }
@@ -53,14 +60,14 @@
   margin-top: 24px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #3b82f6;
-  color: white;
+  background-color: var(--color-btn-primary);
+  color: var(--color-text-light);
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius-btn);
   cursor: pointer;
 }
 
 .next-button:disabled {
-  background-color: #b3c1e1;
+  background-color: var(--color-btn-disabled);
   cursor: not-allowed;
 }

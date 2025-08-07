@@ -181,6 +181,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 import { DateRangeService } from '../../services/date-range.service';
+import { SimulationService } from '../../services/simulation.service'; // ✅ Corrected import
 
 
 interface ValidationResponse {
@@ -204,20 +205,20 @@ interface ValidationResponse {
 export class DateRangesComponent {
   @Output() nextStep = new EventEmitter<void>();
 
-  trainingStartDate = '';
-  trainingEndDate = '';
+  trainingStartDate = '2021-01-01';
+  trainingEndDate = '2021-01-01';
   trainingStartTime = '00:00:00';
-  trainingEndTime = '23:59:59';
+  trainingEndTime = '00:59:59';
 
-  testingStartDate = '';
-  testingEndDate = '';
-  testingStartTime = '00:00:00';
-  testingEndTime = '23:59:59';
+  testingStartDate = '2021-01-01';
+  testingEndDate = '2021-01-01';
+  testingStartTime = '01:00:00';
+  testingEndTime = '01:59:59';
 
-  simulationStartDate = '';
-  simulationEndDate = '';
-  simulationStartTime = '00:00:00';
-  simulationEndTime = '23:59:59';
+  simulationStartDate = '2021-01-01';
+  simulationEndDate = '2021-01-01';
+  simulationStartTime = '02:00:00';
+  simulationEndTime = '02:30:59';
 
   isValid = false;
   validated = false;
@@ -248,8 +249,11 @@ export class DateRangesComponent {
     plugins: { legend: { display: true } }
   };
 
-constructor(private http: HttpClient, private dateRangeService: DateRangeService) {}
-
+  constructor(
+    private http: HttpClient,
+    private dateRangeService: DateRangeService,
+    private simulationService: SimulationService // ✅ Corrected type
+  ) {}
 
   validateRanges(): void {
     this.isValid = false;
@@ -285,6 +289,10 @@ constructor(private http: HttpClient, private dateRangeService: DateRangeService
             payload.training.end,
             payload.testing.start,
             payload.testing.end
+          );
+          this.simulationService.setRanges(
+            payload.simulation.start,
+            payload.simulation.end
           );
         }
       },
@@ -341,3 +349,4 @@ constructor(private http: HttpClient, private dateRangeService: DateRangeService
     }
   }
 }
+

@@ -104,6 +104,10 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Limits.MaxRequestBodySize = 10_000_000_000;
 });
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.AllowSynchronousIO = true;
+});
 
 // Add services to the container
 builder.Services.AddControllers();

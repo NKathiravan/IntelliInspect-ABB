@@ -67,7 +67,7 @@
 
 //}
 
-using IntelliInspect.API.Models;
+uusing IntelliInspect.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -90,7 +90,7 @@ namespace IntelliInspect.API.Controllers
         [HttpPost("start")]
         public async Task StartSimulation([FromBody] SimulationRequest request)
         {
-            var fastApiUrl = _configuration["MLService:PredictionUrl"]; // should be like http://localhost:8000/simulate
+            var fastApiUrl = _configuration["MLService:PredictionUrl"]; // e.g., http://localhost:8000/simulate
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, fastApiUrl)
             {
@@ -98,24 +98,22 @@ namespace IntelliInspect.API.Controllers
             };
 
             var fastApiResponse = await _httpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead);
-
             fastApiResponse.EnsureSuccessStatusCode();
 
             var responseStream = await fastApiResponse.Content.ReadAsStreamAsync();
 
-            Response.ContentType = "text/event-stream";
+            HttpContext.Response.ContentType = "text/event-stream";
+            HttpContext.Response.Headers.Add("Cache-Control", "no-cache");
+            HttpContext.Response.Headers.Add("X-Accel-Buffering", "no");
 
-            using var writer = new StreamWriter(Response.Body);
             using var reader = new StreamReader(responseStream);
-
             while (!reader.EndOfStream)
             {
                 var line = await reader.ReadLineAsync();
                 if (!string.IsNullOrWhiteSpace(line))
                 {
-                    await writer.WriteLineAsync($"data: {line}\n");
-                    await writer.WriteLineAsync(); // add newline for SSE
-                    await writer.FlushAsync();
+                    await HttpContext.Response.WriteAsync($"data: {line}\n\n");
+                    await HttpContext.Response.Body.FlushAsync();
                 }
             }
         }
