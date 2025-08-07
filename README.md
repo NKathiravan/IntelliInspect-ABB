@@ -21,8 +21,8 @@ The application is fully containerized and can be deployed using Docker Compose.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/intelliinspect.git
-cd intelliinspect
+git clone https://github.com/NKathiravan/IntelliInspect-ABB.git
+cd IntelliInspect-ABB
 ```
 
 
