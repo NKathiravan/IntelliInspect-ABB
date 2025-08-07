@@ -67,7 +67,7 @@
 
 //}
 
-uusing IntelliInspect.API.Models;
+using IntelliInspect.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Net.Http.Json;
