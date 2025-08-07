@@ -1,6 +1,19 @@
 version: "3.8"
 
 services:
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - intelliinspect-network  # ✅ Added network
+
   frontend:
     build: ./frontend
     ports:
@@ -13,11 +26,13 @@ services:
   intelliinspect-api:
     build: ./IntelliInspect.API
     ports:
-      - "5000:5000" # ✅ Match internal and external ports
+      - "5000:5000"
     environment:
-      - ASPNETCORE_URLS=http://+:5000 # ✅ Matches what's set in Program.cs
+      - ASPNETCORE_URLS=http://+:5000
+      - MONGODB_URI=mongodb://root:password@mongodb:27017 # ✅ Add this if .NET connects to MongoDB
     depends_on:
       - mlservice
+      - mongodb # ✅ Ensure MongoDB is up before API
     networks:
       - intelliinspect-network
 
@@ -27,6 +42,11 @@ services:
       - "8000:8000"
     networks:
       - intelliinspect-network
+    depends_on:
+      - mongodb # ✅ Optional, only if ML service uses MongoDB
+
+volumes:
+  mongodb_data:
 
 networks:
   intelliinspect-network:
