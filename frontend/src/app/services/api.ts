@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:5144/api';
+  private baseUrl = 'http://localhost:5000/api';
 
   getData(): Observable<any> {
     return this.http.get(`${this.baseUrl}/data`);

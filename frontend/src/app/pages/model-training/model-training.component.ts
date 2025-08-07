@@ -53,7 +53,7 @@ export class ModelTrainingComponent implements OnInit {
       testEnd: this.testEnd
     };
 
-    this.http.post<any>('http://localhost:5144/api/TrainModel', payload).subscribe({
+    this.http.post<any>('http://localhost:5000/api/TrainModel', payload).subscribe({
       next: (res) => {
         this.metrics = res.metrics;
         this.trainingChartImage = 'data:image/png;base64,' + res.trainingChart;

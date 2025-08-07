@@ -6,12 +6,24 @@
   background: linear-gradient(135deg, var(--color-header-gradient-1), var(--color-header-gradient-2));
 }
 
-.card {
+/* .cardlogin {
   background: var(--color-glass);
   backdrop-filter: var(--color-glass-backdrop);
   padding: 40px 30px;
   border-radius: var(--radius-main);
   width: 320px;
+  box-shadow: var(--color-shadow);
+  border: 1px solid var(--color-card-border);
+  color: var(--color-text-light);
+  animation: fadeIn 1s ease-in-out;
+  
+} */
+ .cardlogin {
+  background: var(--color-glass);
+  backdrop-filter: var(--color-glass-backdrop);
+  padding: 60px 40px; /* Increased padding for more spacing */
+  border-radius: var(--radius-main);
+  width: 420px; /* Increased width */
   box-shadow: var(--color-shadow);
   border: 1px solid var(--color-card-border);
   color: var(--color-text-light);

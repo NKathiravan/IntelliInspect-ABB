@@ -53,6 +53,41 @@
     </div>
   </div>
 
+<!-- Range Summary Cards Row -->
+<div class="range-summary-row">
+  <!-- Training Card -->
+  <div class="summary-card training">
+    <div class="summary-title">Training</div>
+    <div class="summary-range">
+      {{ trainingStartDate }} → {{ trainingEndDate }}
+    </div>
+    <div class="summary-days">
+      {{ getDays(trainingStartDate, trainingEndDate) }} days
+    </div>
+  </div>
+
+  <!-- Testing Card -->
+  <div class="summary-card testing">
+    <div class="summary-title">Testing</div>
+    <div class="summary-range">
+      {{ testingStartDate }} → {{ testingEndDate }}
+    </div>
+    <div class="summary-days">
+      {{ getDays(testingStartDate, testingEndDate) }} days
+    </div>
+  </div>
+
+  <!-- Simulation Card -->
+  <div class="summary-card simulation">
+    <div class="summary-title">Simulation</div>
+    <div class="summary-range">
+      {{ simulationStartDate }} → {{ simulationEndDate }}
+    </div>
+    <div class="summary-days">
+      {{ getDays(simulationStartDate, simulationEndDate) }} days
+    </div>
+  </div>
+</div>
 
 
   <!-- Action Buttons -->

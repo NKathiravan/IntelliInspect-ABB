@@ -1,0 +1,29 @@
+# Build output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# IDE/editor config
+.vscode/
+.idea/
+
+# User-specific files
+*.user
+*.suo
+
+# Git
+.git/
+.gitignore
+
+# Env and secrets
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

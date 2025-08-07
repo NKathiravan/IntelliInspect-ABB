@@ -24,7 +24,7 @@ export class SimulationService {
     onMessage: (data: any) => void,
     onError: (error: any) => void
   ): void {
-    const url = 'http://localhost:5144/api/simulation/start';
+    const url = 'http://localhost:5000/api/simulation/start';
 
     this.eventSource = new EventSourcePolyfill(url, {
       headers: {

@@ -40,7 +40,7 @@ namespace IntelliInspectBackend.Controllers
                 var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
                 // URL from config or hardcoded
-                var mlServiceUrl = _config["MLService:BaseUrl"] ?? "http://localhost:8000";
+                var mlServiceUrl = _config["MLService:BaseUrl"] ?? "http://mlservice:8000";
                 var response = await _httpClient.PostAsync($"{mlServiceUrl}/train-model", content);
 
                 if (!response.IsSuccessStatusCode)

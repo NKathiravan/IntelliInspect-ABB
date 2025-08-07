@@ -13,5 +13,5 @@ export const routes: Routes = [
   {path: 'login',component: LoginComponent},
   // { path: 'date-ranges', component: DateRangesComponent },
   // { path: 'model-training', component: ModelTrainingComponent },
-  { path: 'simulation', component: SimulationComponent }
+  // { path: 'simulation', component: SimulationComponent }
 ];

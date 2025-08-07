@@ -107,3 +107,39 @@
   background-color: var(--color-error);
   color: var(--color-text-light);
 }
+
+.range-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.summary-card {
+  flex: 1;
+  background-color: var(--color-card);
+  color: var(--color-text-main);
+  padding: 1.5rem;
+  border-radius: var(--radius-main);
+  box-shadow: var(--color-shadow);
+  text-align: center;
+  border: 1px solid var(--color-card-border);
+}
+
+.summary-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.summary-range {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.summary-days {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-accent);
+}

@@ -41,7 +41,7 @@ export class LoginComponent {
   onLogin() {
     if (this.loginForm.invalid) return;
 
-    this.http.post('http://localhost:5144/api/Auth/login', this.loginForm.value, { withCredentials: true }).subscribe({
+    this.http.post('http://localhost:5000/api/Auth/login', this.loginForm.value, { withCredentials: true }).subscribe({
       next: () => {
         this.message = 'Login successful!';
         this.router.navigate(['/master']); // ✅ This will now work
@@ -53,7 +53,7 @@ export class LoginComponent {
   onSignup() {
     if (this.signupForm.invalid) return;
 
-    this.http.post('http://localhost:5144/api/Auth/register', this.signupForm.value).subscribe({
+    this.http.post('http://localhost:5000/api/Auth/register', this.signupForm.value).subscribe({
       next: () => {
         this.message = 'Registration successful!';
         this.toggleMode();

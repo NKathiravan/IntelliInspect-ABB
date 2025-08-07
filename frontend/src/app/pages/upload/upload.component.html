@@ -1,14 +1,22 @@
 <!-- Only upload content, no header/footer/stepper here -->
 <div>
-  <div>
   <div class="panel-header">
     <span class="panel-title">Date Range Selection</span>
     <span class="step-badge">Step 1 of 4</span>
   </div>
-  <!-- Upload Box -->
-  <div class="upload-box" *ngIf="!fileUploaded">
-    <label for="fileInput" class="file-label">Choose CSV File</label>
-    <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".csv" />
+
+  <!-- Upload Box with Drag & Drop -->
+  <div
+    class="upload-box"
+    [class.dragover]="isDragging"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    *ngIf="!fileUploaded"
+  >
+    <label for="fileInput" class="file-label">Drag & Drop or Click to Upload CSV</label>
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".csv" hidden />
+    <button class="upload-btn" (click)="triggerFileInput()">Choose File</button>
   </div>
 
   <!-- Summary Cards -->
@@ -35,7 +43,7 @@
       </div>
     </div>
 
-    <!-- Columns Card (Fixed) -->
+    <!-- Columns Card -->
     <div class="summary-card">
       <div class="icon columns-icon">
         <img src="../../assets/icons/columns.svg" alt="Columns Icon" />

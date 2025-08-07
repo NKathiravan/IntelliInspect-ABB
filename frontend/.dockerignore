@@ -1,0 +1,23 @@
+# Angular build artifacts
+node_modules/
+dist/
+build/
+
+# IDE/editor config
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Git
+.git/
+.gitignore
+
+# Env files
+.env
+.env.*

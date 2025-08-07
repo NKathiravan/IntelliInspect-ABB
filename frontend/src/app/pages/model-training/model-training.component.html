@@ -6,10 +6,15 @@
       <span class="step-badge">Step 3 of 4</span>
     </div>
 
-    <!-- Train Model + Status Message Row -->
-    <div class="train-status-row">
-      <button (click)="onTrainModel()" [disabled]="loading || isTrained">Train Model</button>
-      <p class="status">{{ statusMessage }}</p>
+    <!-- Buttons and status -->
+    <div class="train-next-row">
+      <div class="left-side">
+        <button (click)="onTrainModel()" [disabled]="loading || isTrained">Train Model</button>
+        <p class="status">{{ statusMessage }}</p>
+      </div>
+      <div class="right-side">
+        <button (click)="onNext()" [disabled]="!isTrained" class="next-button">Next</button>
+      </div>
     </div>
 
     <!-- Metrics -->
@@ -32,8 +37,5 @@
         <img [src]="donutChartImage" alt="Donut Chart">
       </div>
     </div>
-
-    <!-- Next Button -->
-    <button (click)="onNext()" [disabled]="!isTrained" class="next-button">Next</button>
   </div>
 </div>

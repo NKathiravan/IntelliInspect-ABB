@@ -452,3 +452,203 @@ button:disabled,
     margin-bottom: 0.5rem;
   }
 }
+.panel-actions {
+  display: flex;
+  justify-content: space-between; /* Pushes buttons to ends */
+  align-items: center;
+  margin-top: 1rem; /* Optional: space above */
+}
+.chart-container {
+  width: 85px;        /* Set your desired width */
+  margin: 10 auto;      /* Center the chart */
+}
+
+.model-training-container {
+  padding: 20px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.panel-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.step-badge {
+  background-color: #d9e4f5;
+  color: #004085;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.train-next-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.left-side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.status {
+  font-style: italic;
+  font-size: 14px;
+  color: #555;
+}
+
+.metrics-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  background: #f5f7fb;
+  padding: 16px;
+  border-radius: 12px;
+  min-width: 160px;
+  text-align: center;
+  font-weight: bold;
+  margin: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.charts-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.chart-box {
+  flex: 1 1 45%;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.chart-box h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chart-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.next-button {
+  padding: 10px 20px;
+  background-color: #004085;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.next-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.simulation-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+}
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+}
+
+.card-full {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.chart-card {
+  flex: 1 1 48%;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.stat-item {
+  font-size: 16px;
+  color: #333;
+}
+
+.start-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.start-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.prediction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.prediction-table th,
+.prediction-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.prediction-table thead {
+  background-color: #f2f2f2;
+}
+  

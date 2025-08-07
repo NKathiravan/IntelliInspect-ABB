@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - intelliinspect-api
+    networks:
+      - intelliinspect-network
+
+  intelliinspect-api:
+    build: ./IntelliInspect.API
+    ports:
+      - "5000:5000" # ✅ Match internal and external ports
+    environment:
+      - ASPNETCORE_URLS=http://+:5000 # ✅ Matches what's set in Program.cs
+    depends_on:
+      - mlservice
+    networks:
+      - intelliinspect-network
+
+  mlservice:
+    build: ./mlservice
+    ports:
+      - "8000:8000"
+    networks:
+      - intelliinspect-network
+
+networks:
+  intelliinspect-network:
+    driver: bridge

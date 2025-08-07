@@ -118,8 +118,10 @@ app = FastAPI(title="Bosch ML Training API")
 
 # CORS configuration
 origins = [
-    "http://localhost:5144",
+    "http://localhost:5000",           # Accessing from browser
+    "http://intelliinspect-api:5000",  # Accessing from inside other container
 ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -148,7 +150,7 @@ def encode_fig(fig):
 # Utility: Fetch dataset from .NET backend
 def fetch_dataset_from_dotnet():
     try:
-        url = "http://localhost:5144/api/dataset/download"
+        url = "http://intelliinspect-api:5000/api/dataset/download"
         response = requests.get(url)
         response.raise_for_status()
         df = pd.read_csv(BytesIO(response.content))

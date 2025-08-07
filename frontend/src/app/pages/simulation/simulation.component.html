@@ -1,22 +1,35 @@
 <div class="simulation-container">
-  <h2>Real-Time Prediction Stream</h2>
-
-  <button class="start-btn" (click)="startSimulation()" [disabled]="simulationStarted">
-    {{ simulationStarted ? 'Streaming...' : 'Start Simulation' }}
-  </button>
-
-  <!-- Live Stats -->
-  <div class="stats-panel">
-    <div>Total: {{ total }}</div>
-    <div>Pass: {{ pass }}</div>
-    <div>Fail: {{ fail }}</div>
-    <div>Avg. Confidence: {{ avgConfidence | number: '1.2-2' }}%</div>
+ <div>
+    <div class="panel-header">
+      <span class="panel-title">Simulation</span>
+      <span class="step-badge">Step 4 of 4</span>
+    </div>
+  <!-- Start Button -->
+  <div class="card-row">
+    <div class="card-full">
+      <button class="start-btn" (click)="startSimulation()" [disabled]="simulationStarted">
+        {{ simulationStarted ? 'Streaming...' : 'Start Simulation' }}
+      </button>
+    </div>
   </div>
 
-  <!-- Charts -->
-  <div class="chart-row">
-    <!-- Line Chart: Quality Score -->
-    <div class="chart-box">
+  <!-- Stats Panel in Card -->
+  <div class="card-row">
+    <div class="card">
+      <h3>Live Statistics</h3>
+      <div class="stats-grid">
+        <div class="stat-item"><strong>Total:</strong> {{ total }}</div>
+        <div class="stat-item"><strong>Pass:</strong> {{ pass }}</div>
+        <div class="stat-item"><strong>Fail:</strong> {{ fail }}</div>
+        <div class="stat-item"><strong>Avg. Confidence:</strong> {{ avgConfidence | number: '1.2-2' }}%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts in Card -->
+  <div class="card-row">
+    <!-- Line Chart Card -->
+    <div class="card chart-card">
       <h3>Pass Percentage (Quality Score)</h3>
       <canvas baseChart
               [datasets]="[{ data: qualityScoreData, label: 'Pass %' }]"
@@ -27,8 +40,8 @@
       </canvas>
     </div>
 
-    <!-- Doughnut Chart: Confidence -->
-    <div class="chart-box">
+    <!-- Doughnut Chart Card -->
+    <div class="card chart-card">
       <h3>Avg Confidence Score</h3>
       <canvas baseChart
               [data]="doughnutChartData"
@@ -39,25 +52,30 @@
     </div>
   </div>
 
-  <!-- Table -->
-  <table class="prediction-table">
-    <thead>
-      <tr>
-        <th>Timestamp</th>
-        <th>Sample ID</th>
-        <th>Prediction</th>
-        <th>Confidence</th>
-        <th>Label</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let msg of messages">
-        <td>{{ msg.timestamp }}</td>
-        <td>{{ msg.sample_id }}</td>
-        <td>{{ msg.prediction }}</td>
-        <td>{{ msg.confidence | number: '1.2-4' }}</td>
-        <td>{{ msg.label }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Table in Card -->
+  <div class="card-row">
+    <div class="card">
+      <h3>Prediction Stream</h3>
+      <table class="prediction-table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Sample ID</th>
+            <th>Prediction</th>
+            <th>Confidence</th>
+            <th>Label</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let msg of messages">
+            <td>{{ msg.timestamp }}</td>
+            <td>{{ msg.sample_id }}</td>
+            <td>{{ msg.prediction }}</td>
+            <td>{{ msg.confidence | number: '1.2-4' }}</td>
+            <td>{{ msg.label }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
