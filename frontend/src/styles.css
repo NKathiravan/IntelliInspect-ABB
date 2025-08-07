@@ -1,32 +1,32 @@
 /* Global Theme Variables */
 :root {
-  --color-bg: #f5f7fa;
-  --color-bg-secondary: #fff;
-  --color-glass: rgba(255, 255, 255, 0.178);
-  --color-header-gradient-1: #e25151;
-  --color-header-gradient-2: #c41818;
-  --color-stepper-bg: #e0e0e0;
-  --color-active-step: #007bff;
-  --color-completed-step: #25c18e;
-  --color-panel: #fff;
-  --color-card: #fff;
-  --color-card-border: #ddd;
-  --color-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  --color-text-main: #222;
-  --color-text-light: #fff;
-  --color-accent: #2b7bff;
-  --color-success: #25c18e;
-  --color-warning: #ffaa33;
-  --color-error: #dc3545;
-  --color-btn-primary: #2b7bff;
-  --color-btn-primary-hover: #1857b6;
-  --color-btn-disabled: #b3c1e1;
-  --color-table-bg-even: #f7fafd;
-  --color-table-bg-odd: #fff;
+  --color-bg: #fff5f5; /* soft pink background */
+  --color-bg-secondary: #ffffff; /* clean white */
+  --color-glass: rgba(255, 255, 255, 0.2);
+  --color-header-gradient-2: #e53935; /* vibrant red */
+  --color-header-gradient-1: #fbc2c2; /* faded pink/white */
+  --color-stepper-bg: #f0dada;
+  --color-active-step: #d32f2f; /* bold red */
+  --color-completed-step: #81c784; /* soft green for success */
+  --color-panel: #ffffff;
+  --color-card: #fffafa;
+  --color-card-border: #f2baba; /* pinkish border */
+  --color-shadow: 0 4px 24px rgba(229, 57, 53, 0.12); /* red hue shadow */
+  --color-text-main: #2a2a2a; /* rich dark grey for good readability */
+  --color-text-light: #ffffff;
+  --color-accent: #e53935; /* strong red accent */
+  --color-success: #43a047; /* green success */
+  --color-warning: #ffa726; /* warm orange warning */
+  --color-error: #e53935; /* match red theme */
+  --color-btn-primary: #e53935; /* primary red button */
+  --color-btn-primary-hover: #b71c1c; /* deep red hover */
+  --color-btn-disabled: #f8bbbb; /* light pink disabled */
+  --color-table-bg-even: #fff0f0;
+  --color-table-bg-odd: #ffffff;
   --color-glass-backdrop: blur(15px);
-  --color-chart-bg: #fafafa;
-  --color-metric-card: #e0f7fa;
-  --color-status-text: #3b82f6;
+  --color-chart-bg: #fff5f5;
+  --color-metric-card: #ffeaea; /* light pink cards */
+  --color-status-text: #b71c1c; /* deep red for messages */
   --radius-main: 12px;
   --radius-btn: 6px;
   --font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
@@ -85,24 +85,31 @@ html, body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-
-/* Header */
 .header {
   background: linear-gradient(to right, var(--color-header-gradient-1), var(--color-header-gradient-2));
   color: var(--color-text-light);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 1rem 2rem;
-}
-
-.main-title {
-  font-size: 1.8rem;
-  margin: 0;
 }
 
 .logo {
   height: 40px;
+  flex-shrink: 0;
+}
+
+.main-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.spacer {
+  width: 40px; /* equal to logo width to balance */
+  flex-shrink: 0;
 }
 
 /* Stepper */
@@ -360,8 +367,8 @@ button:disabled,
 
 /* Footer */
 .footer {
-  background: linear-gradient(to right, var(--color-header-gradient-1), var(--color-header-gradient-2));
-  color: var(--color-text-light);
+  background: linear-gradient(to right, var(--color-header-gradient-2), var(--color-header-gradient-1));
+  color: var(--color-header-gradient-2); /* <-- updated text color */
   text-align: right;
   padding: 1rem;
   font-weight: bold;
@@ -369,6 +376,7 @@ button:disabled,
   width: 100%;
   position: relative;
 }
+
 
 /* Responsive Layout */
 @media (max-width: 768px) {
